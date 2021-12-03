@@ -1,0 +1,37 @@
+{
+  "private": true,
+  "name": "remix-app-template",
+  "description": "",
+  "license": "",
+  "scripts": {
+    "build": "remix build",
+    "dev": "concurrently -n remix,miniflare \"remix watch\" \"npm run miniflare\"",
+    "postinstall": "remix setup cloudflare-workers",
+    "build:worker": "esbuild --define:process.env.NODE_ENV='\"production\"' --minify --bundle --sourcemap --outdir=dist ./worker",
+    "dev:worker": "esbuild --define:process.env.NODE_ENV='\"development\"' --bundle --sourcemap --outdir=dist ./worker",
+    "miniflare": "miniflare --build-command \"npm run dev:worker\" --watch",
+    "deploy": "npm run build && wrangler publish"
+  },
+  "dependencies": {
+    "@remix-run/cloudflare-workers": "v0.0.0-experimental-ab9dac4f",
+    "@remix-run/react": "v0.0.0-experimental-ab9dac4f",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "remix": "v0.0.0-experimental-ab9dac4f"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^2.2.2",
+    "@remix-run/dev": "v0.0.0-experimental-ab9dac4f",
+    "@types/react": "^17.0.24",
+    "@types/react-dom": "^17.0.9",
+    "concurrently": "^6.4.0",
+    "esbuild": "0.13.14",
+    "miniflare": "2.0.0-next.3",
+    "typescript": "^4.1.2"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "sideEffects": false,
+  "main": "dist/worker.js"
+}
