@@ -60,7 +60,7 @@ export function JigsawPuzzle({
     | undefined
   >();
 
-  let draggingClasses = ["shadow-2xl", "z-[5]"];
+  let draggingClasses = ["shadow-xl", "z-[5]"];
 
   let onImageLoaded = useCallback(
     (image: HTMLImageElement) => {

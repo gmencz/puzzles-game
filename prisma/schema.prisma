@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                           String                         @id @default(uuid())
+  email                        String                         @unique
+  password                     String
+  jigsawPuzzleLevelCompletions JigsawPuzzleLevelCompletions[]
+}
+
+model JigsawPuzzleLevel {
+  id          String                         @id @default(uuid())
+  number      Int
+  imageURL    String
+  rows        Int
+  cols        Int
+  topic       JigsawPuzzlesTopic             @relation(fields: [topicId], references: [id])
+  topicId     String
+  completions JigsawPuzzleLevelCompletions[]
+}
+
+model JigsawPuzzlesTopic {
+  id   String @id @default(uuid())
+  name String @unique
+
+  jigsawPuzzleLevels JigsawPuzzleLevel[]
+
+  requiredTopicCompletions JigsawPuzzlesTopic[] @relation("JigsawPuzzlesTopicRequiredCompletions", references: [id])
+  requiredByTopics         JigsawPuzzlesTopic[] @relation("JigsawPuzzlesTopicRequiredCompletions", references: [id])
+}
+
+model JigsawPuzzleLevelCompletions {
+  user                User              @relation(fields: [userId], references: [id])
+  userId              String
+  jigsawPuzzleLevel   JigsawPuzzleLevel @relation(fields: [jigsawPuzzleLevelId], references: [id])
+  jigsawPuzzleLevelId String
+  completedAt         DateTime          @default(now())
+  tookMs              Int
+
+  @@id([userId, jigsawPuzzleLevelId])
+}
