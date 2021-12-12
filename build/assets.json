@@ -1,0 +1,32 @@
+{
+  "version": "356ba156",
+  "entry": {
+    "module": "/build/entry.client-UHYROWSR.js",
+    "imports": [
+      "/build/_shared/chunk-JT5H6NOZ.js",
+      "/build/_shared/chunk-E7VMOUYL.js"
+    ]
+  },
+  "routes": {
+    "root": {
+      "id": "root",
+      "path": "",
+      "module": "/build/root-5B6W5LCF.js",
+      "hasAction": false,
+      "hasLoader": false,
+      "hasCatchBoundary": true,
+      "hasErrorBoundary": true
+    },
+    "routes/index": {
+      "id": "routes/index",
+      "parentId": "root",
+      "index": true,
+      "module": "/build/routes/index-PZLZXF2D.js",
+      "hasAction": false,
+      "hasLoader": false,
+      "hasCatchBoundary": false,
+      "hasErrorBoundary": false
+    }
+  },
+  "url": "/build/manifest-356BA156.js"
+}

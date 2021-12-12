@@ -6,5 +6,5 @@ module.exports = {
   browserBuildDirectory: "public/build",
   publicPath: "/build/",
   serverBuildDirectory: "build",
-  devServerBroadcastDelay: 1000
+  devServerPort: 8002
 };
